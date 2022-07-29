@@ -5,45 +5,37 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { GammaCorrectionShader } from "three/examples/jsm/shaders/GammaCorrectionShader.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { RGBShiftShader } from "three/examples/jsm/shaders/RGBShiftShader.js";
-import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { useEffect } from 'react';
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { Fog } from 'three';
 
 
 function HomePage() {
-
-  const textureLoader: THREE.TextureLoader = new THREE.TextureLoader();
+  const textureLoader = new THREE.TextureLoader();
   const gridTexture: THREE.Texture = textureLoader.load("/grid-6.png");
   const heightTexture: THREE.Texture = textureLoader.load("/displacement-7.png");
   const metalnessTexture: THREE.Texture = textureLoader.load("/metalness-2.png");
 
-
-
   //init scene class
-  const scene: THREE.Scene = new THREE.Scene()
-  const canvas: Element = document.querySelector("canvas.webgl");
+  const scene = new THREE.Scene()
 
   //init webgl renderer
-  const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer()
+  const renderer = new THREE.WebGLRenderer()
   renderer.setSize(window.innerWidth, window.innerHeight)
   document.body.appendChild(renderer.domElement)
 
-  //create a simple plane
-  const geometry: THREE.PlaneGeometry = new THREE.PlaneGeometry(1, 2, 24, 24);
+  const geometry = new THREE.PlaneGeometry(1, 2, 24, 24);
 
-  const planeProperties = {
-    displacementScale: 0.4,
-    metalness: 1,
-    roughness: 0.5,
-  };
+
   const material = new THREE.MeshStandardMaterial({
     map: gridTexture,
     displacementMap: heightTexture,
-    displacementScale: planeProperties.displacementScale,
-    metalness: planeProperties.metalness,
+    displacementScale: 0.4,
+    metalness: 1,
     metalnessMap: metalnessTexture,
-    roughness: planeProperties.roughness,
+    roughness: 0.5,
   });
+
   const plane = new THREE.Mesh(geometry, material);
   const plane2 = new THREE.Mesh(geometry, material);
   plane.rotation.x = -Math.PI * 0.5;
@@ -58,7 +50,7 @@ function HomePage() {
 
 
 
-  const fog: Fog = new THREE.Fog("#000000", 1, 2.5);
+  const fog = new THREE.Fog("#000000", 1, 2.5);
   scene.fog = fog;
 
   // Lights
@@ -68,7 +60,7 @@ function HomePage() {
 
   const spotlight = new THREE.SpotLight(
     "#d53c3d",
-    40,
+    50,
     25,
     Math.PI * 0.1,
     0.25
@@ -82,15 +74,13 @@ function HomePage() {
 
   const spotlight2 = new THREE.SpotLight(
     "#d53c3d",
-    40,
+    50,
     25,
     Math.PI * 0.1,
     0.25
   );
   spotlight2.position.set(-0.5, 0.75, 2.1);
-  spotlight2.target.position.x = 0.25;
-  spotlight2.target.position.y = 0.25;
-  spotlight2.target.position.z = 0.25;
+  spotlight2.target.position.set(.25, .25, .25);
   scene.add(spotlight2);
   scene.add(spotlight2.target);
 
@@ -101,14 +91,14 @@ function HomePage() {
 
   // Base camera
   const camera = new THREE.PerspectiveCamera(
-    75,
+    60,
     sizes.width / sizes.height,
     0.01,
     20
   );
-  camera.position.x = 0;
-  camera.position.y = 0.06;
-  camera.position.z = 1.1;
+
+  //camera xyz pos
+  camera.position.set(0, 0.06, 1.1);
   scene.add(camera);
 
 
@@ -129,10 +119,15 @@ function HomePage() {
   const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);
   effectComposer.addPass(gammaCorrectionPass);
 
+  let bloomResolution = new THREE.Vector2(window.innerWidth, window.innerHeight)
+  const bloomPass = new UnrealBloomPass(bloomResolution, 1, 1, 1);
+
+  effectComposer.addPass(bloomPass);
+
 
   //init control module
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
+  // const controls = new OrbitControls(camera, renderer.domElement);
+  // controls.enableDamping = true;
 
 
   //event listener updates the canvas when the window is resized
@@ -153,22 +148,23 @@ function HomePage() {
 
   const clock = new THREE.Clock();
   //animation loop
-  var animate = function () {
+  let animate = function (): void {
     requestAnimationFrame(animate)
     const elapsedTime = clock.getElapsedTime();
 
     // Update plane position
-    plane.position.z = (elapsedTime * 0.15) % 2;
-    plane2.position.z = ((elapsedTime * 0.15) % 2) - 2;
+    let planeSpeed: number = 0.12;
+    plane.position.z = (elapsedTime * planeSpeed) % 2;
+    plane2.position.z = ((elapsedTime * planeSpeed) % 2) - 2;
 
     effectComposer.render();
 
-    controls.update()
+    // controls.update()
 
     renderer.render(scene, camera)
   };
 
-  function render() {
+  function render(): void {
     renderer.render(scene, camera)
   }
   render()
