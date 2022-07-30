@@ -3,12 +3,29 @@ body {
   margin: 0px;
 }
 
-#info {
+
+.info {
   position: absolute;
-  top: 10px;
+  top: 100px;
   width: 100%;
   text-align: center;
   z-index: 100;
   display: block;
-  color: white;
+  /* color: #CA7CD8; */
+  color: #F8F0E3;
+  font-family: 'Times New Roman', Times, serif;
+  letter-spacing: 5px;
+
+}
+
+#name {
+  font-size: 100px;
+  font-weight: bold;
+
+}
+
+.favi-link {
+  max-width: 30%;
+  height: auto;
+
 }

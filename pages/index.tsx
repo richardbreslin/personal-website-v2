@@ -17,11 +17,20 @@ function HomePage() {
   const heightTexture: THREE.Texture = textureLoader.load("/displacement-7.png");
   const metalnessTexture: THREE.Texture = textureLoader.load("/metalness-2.png");
 
+
+
   //init scene class
   const scene = new THREE.Scene()
 
+  const loader = new THREE.TextureLoader();
+  const bgTexture = loader.load('/background.jpg');
+  scene.background = bgTexture;
+
+
   //init webgl renderer
-  const renderer = new THREE.WebGLRenderer()
+  const renderer = new THREE.WebGLRenderer({
+    alpha: true,
+  })
   renderer.setSize(window.innerWidth, window.innerHeight)
   document.body.appendChild(renderer.domElement)
 
@@ -174,8 +183,32 @@ function HomePage() {
 
 function Content() {
   return (
-    <div id="info">
-      <h1>Richard Breslin</h1>
+    <div class="info">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"></link>
+
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1 id="name">Richard Breslin</h1>
+          </div>
+        </div>
+        <div class="row justify-content-md-center"  >
+          <div class="col-md-auto">
+            <a href="https://github.com/richardbreslin"><img src="/github.png" class="favi-link"></img></a>
+
+          </div>
+          <div class="col-md-auto">
+            <a href="https://www.linkedin.com/in/r-breslin/"><img src="/linkedin.png" class="favi-link"></img></a>
+          </div>
+          <div class="col-md-auto">
+            <a href="mailto: richardbreslin@wayne.edu"><img src="/email2.png" class="favi-link"></img></a>
+          </div>
+          <div class="col-md-auto">
+            <a href="https://resume.r1ch.dev"><img src="/cv.png" class="favi-link"></img></a>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
