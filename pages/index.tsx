@@ -187,7 +187,7 @@ function Content() {
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"></link>
 
       <div class="container">
-        <div class="row">
+        <div class="row" style={{ display: "inline-block" }}>
           <div class="col">
             <div class="typewriter">
               <h1>Richard Breslin</h1>
@@ -204,7 +204,7 @@ function Content() {
         </div>
       </div>
 
-    </div>
+    </div >
   );
 }
 

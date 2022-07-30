@@ -51,11 +51,12 @@ body {
   letter-spacing: 5px;
   /* Adjust as needed */
   animation:
-    typing 3.5s steps(40, end),
+    typing 3.0s steps(30, end),
     blink-caret .75s step-end infinite;
 
   font-size: 100px;
   font-weight: bold;
+
 
 }
 
