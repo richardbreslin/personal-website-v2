@@ -189,21 +189,16 @@ function Content() {
       <div class="container">
         <div class="row">
           <div class="col">
-            <h1 id="name">Richard Breslin</h1>
+            <div class="typewriter">
+              <h1>Richard Breslin</h1>
+            </div>
           </div>
         </div>
         <div class="row justify-content-md-center"  >
           <div class="col-md-auto">
             <a href="https://github.com/richardbreslin"><img src="/github.png" class="favi-link"></img></a>
-
-          </div>
-          <div class="col-md-auto">
             <a href="https://www.linkedin.com/in/r-breslin/"><img src="/linkedin.png" class="favi-link"></img></a>
-          </div>
-          <div class="col-md-auto">
             <a href="mailto: richardbreslin@wayne.edu"><img src="/email2.png" class="favi-link"></img></a>
-          </div>
-          <div class="col-md-auto">
             <a href="https://resume.r1ch.dev"><img src="/cv.png" class="favi-link"></img></a>
           </div>
         </div>
