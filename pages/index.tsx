@@ -188,7 +188,7 @@ function Content() {
         <div className="row" style={{ display: "inline-block" }}>
           <div className="col">
             <div className="typewriter">
-              <h1>Richard</h1>
+              <h1>Richard Breslin</h1>
             </div>
           </div>
         </div>
