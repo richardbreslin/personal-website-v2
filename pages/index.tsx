@@ -12,6 +12,7 @@ import React from 'react';
 
 
 function HomePage() {
+
   const textureLoader = new THREE.TextureLoader();
   const gridTexture: THREE.Texture = textureLoader.load("/grid.png");
   const heightTexture: THREE.Texture = textureLoader.load("/displacement-7.png");
@@ -22,8 +23,7 @@ function HomePage() {
   //init scene class
   const scene = new THREE.Scene()
 
-  const loader = new THREE.TextureLoader();
-  const bgTexture = loader.load('/background.jpg');
+  const bgTexture = textureLoader.load('/background.jpg');
   scene.background = bgTexture;
 
 
@@ -183,23 +183,21 @@ function HomePage() {
 
 function Content() {
   return (
-    <div class="info">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"></link>
-
-      <div class="container">
-        <div class="row" style={{ display: "inline-block" }}>
-          <div class="col">
-            <div class="typewriter">
+    <div className="info">
+      <div className="container">
+        <div className="row" style={{ display: "inline-block" }}>
+          <div className="col">
+            <div className="typewriter">
               <h1>Richard Breslin</h1>
             </div>
           </div>
         </div>
-        <div class="row justify-content-md-center"  >
-          <div class="col-md-auto">
-            <a href="https://github.com/richardbreslin"><img src="/github.png" class="favi-link"></img></a>
-            <a href="https://www.linkedin.com/in/r-breslin/"><img src="/linkedin.png" class="favi-link"></img></a>
-            <a href="mailto: richardbreslin@wayne.edu"><img src="/email2.png" class="favi-link"></img></a>
-            <a href="https://resume.r1ch.dev"><img src="/cv.png" class="favi-link"></img></a>
+        <div className="row justify-content-md-center"  >
+          <div className="col-md-auto">
+            <a href="https://github.com/richardbreslin"><img src="/github.png" className="favi-link"></img></a>
+            <a href="https://www.linkedin.com/in/r-breslin/"><img src="/linkedin.png" className="favi-link"></img></a>
+            <a href="mailto: richardbreslin@wayne.edu"><img src="/email2.png" className="favi-link"></img></a>
+            <a href="https://resume.r1ch.dev"><img src="/cv.png" className="favi-link"></img></a>
           </div>
         </div>
       </div>

@@ -9,6 +9,7 @@
     "@react-three/drei": "9.3.4",
     "@react-three/fiber": "8.0.10",
     "@types/three": "^0.143.0",
+    "bootstrap": "^5.2.0",
     "next": "latest",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
