@@ -5,13 +5,12 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { GammaCorrectionShader } from "three/examples/jsm/shaders/GammaCorrectionShader.js";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { RGBShiftShader } from "three/examples/jsm/shaders/RGBShiftShader.js";
-import { useEffect } from 'react';
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
-import { Fog } from 'three';
 import React from 'react';
 
 
 function HomePage() {
+
 
   const textureLoader = new THREE.TextureLoader();
   const gridTexture: THREE.Texture = textureLoader.load("/grid.png");
@@ -206,16 +205,27 @@ function Content() {
   );
 }
 
+type MyProps = {
+  // using `interface` is also ok
+  message: string;
+};
+type MyState = {
+  count: number; // like this
+};
 
-
-
-
-export default function IndexPage() {
-  //force next to run clientside
-  useEffect(() => {
+export default class IndexPage extends React.Component<MyProps, MyState> {
+  state: MyState = {
+    // optional second annotation for better type inference
+    count: 0,
+  };
+  componentDidMount(): void {
     HomePage();
-  })
-  return (
-    <Content></Content>
-  )
+  }
+  render() {
+    return (
+      <div>
+        <Content></Content>
+      </div>
+    );
+  }
 }
