@@ -1,6 +1,28 @@
 body {
   overflow: hidden;
   margin: 0px;
+
+}
+
+.transition {
+  animation: fadeInAnimation ease 15s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 
@@ -40,6 +62,7 @@ body {
 }
 
 .typewriter h1 {
+
   overflow: hidden;
   /* Ensures the content is not revealed until the animation */
   border-right: .15em solid #F8F0E3;
@@ -50,36 +73,47 @@ body {
   /* Gives that scrolling effect as the typing happens */
   letter-spacing: 5px;
   /* Adjust as needed */
+
+
   animation:
-    typing 3.0s steps(30, end),
+    typing 6.5s steps(30, end),
     blink-caret .75s step-end infinite;
 
   font-size: 100px;
   font-weight: bold;
 
-
 }
 
 /* The typing effect */
 @keyframes typing {
-  from {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  50% {
     width: 0
   }
 
-  to {
-    width: 100%
+  100% {
+    width: 100%;
   }
 }
 
 /* The typewriter cursor effect */
 @keyframes blink-caret {
 
-  from,
-  to {
+  0% {
     border-color: transparent
   }
 
   50% {
     border-color: #F8F0E3;
+  }
+
+  100% {
+    width: 100%;
+    border-color: #F8F0E3;
+
   }
 }

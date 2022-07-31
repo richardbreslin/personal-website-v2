@@ -9,23 +9,23 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 import React from 'react';
 
 
-type BackgroundProps = {
+type LoadedTextures = {
   gridTexture: THREE.Texture,
   heightTexture: THREE.Texture,
   metalnessTexture: THREE.Texture,
   bgTexture: THREE.Texture,
+  ready: boolean
 };
-type BackgroundState = {};
+type BackgroundProps = {
+  t: LoadedTextures
+};
 
-class Background3D extends React.Component<BackgroundProps, BackgroundState> {
-  state: BackgroundState = {
-  };
-
+class Background3D extends React.Component<BackgroundProps> {
   renderBackground() {
     const scene = new THREE.Scene()
 
 
-    scene.background = this.props.bgTexture;
+    scene.background = this.props.t.bgTexture;
 
 
     //init webgl renderer
@@ -39,11 +39,11 @@ class Background3D extends React.Component<BackgroundProps, BackgroundState> {
 
 
     const material = new THREE.MeshStandardMaterial({
-      map: this.props.gridTexture,
-      displacementMap: this.props.heightTexture,
+      map: this.props.t.gridTexture,
+      displacementMap: this.props.t.heightTexture,
       displacementScale: 0.4,
       metalness: 1,
-      metalnessMap: this.props.metalnessTexture,
+      metalnessMap: this.props.t.metalnessTexture,
       roughness: 0.5,
     });
 
@@ -204,11 +204,13 @@ function Content() {
           </div>
         </div>
         <div className="row justify-content-md-center"  >
-          <div className="col-md-auto">
-            <a href="https://github.com/richardbreslin"><img src="/github.png" className="favi-link"></img></a>
-            <a href="https://www.linkedin.com/in/r-breslin/"><img src="/linkedin.png" className="favi-link"></img></a>
-            <a href="mailto: richardbreslin@wayne.edu"><img src="/email2.png" className="favi-link"></img></a>
-            <a href="https://resume.r1ch.dev"><img src="/cv.png" className="favi-link"></img></a>
+          <div className="transition">
+            <div className="col-md-auto">
+              <a href="https://github.com/richardbreslin"><img src="/github.png" className="favi-link"></img></a>
+              <a href="https://www.linkedin.com/in/r-breslin/"><img src="/linkedin.png" className="favi-link"></img></a>
+              <a href="mailto: richardbreslin@wayne.edu"><img src="/email2.png" className="favi-link"></img></a>
+              <a href="https://resume.r1ch.dev"><img src="/cv.png" className="favi-link"></img></a>
+            </div>
           </div>
         </div>
       </div>
@@ -224,9 +226,14 @@ type MyState = {
   ready: boolean;
 };
 
-export default class IndexPage extends React.Component<MyProps, MyState> {
-  state: MyState = {
-    ready: false,
+export default class IndexPage extends React.Component<LoadedTextures> {
+
+  state: LoadedTextures = {
+    gridTexture: null,
+    heightTexture: null,
+    metalnessTexture: null,
+    bgTexture: null,
+    ready: false
   };
 
   loadTextures() {
@@ -242,16 +249,20 @@ export default class IndexPage extends React.Component<MyProps, MyState> {
       console.log('There was an error loading ' + url);
     };
 
-    const gridTexture: THREE.Texture = loader.load('/grid.png');
-    const heightTexture: THREE.Texture = loader.load("/displacement-7.png");
-    const metalnessTexture: THREE.Texture = loader.load("/metalness-2.png");
-    const bgTexture: THREE.Texture = loader.load('/background.jpg');
+    const loadedTextures: LoadedTextures =
+    {
+      gridTexture: loader.load('/grid.png'),
+      heightTexture: loader.load("/displacement-7.png"),
+      metalnessTexture: loader.load("/metalness-2.png"),
+      bgTexture: loader.load('/background.jpg'),
+      ready: true
+    }
+
+    this.setState({ ...loadedTextures })
 
     manager.onLoad = function () {
-      console.log('Loading complete!');
-
-
-
+      console.log("Loading Complete!")
+      // this.setState({ loadedTextures });
     }
   }
 
@@ -261,9 +272,17 @@ export default class IndexPage extends React.Component<MyProps, MyState> {
 
   render() {
     return (
-      <div>
-        <Background3D></Background3D>
-        <Content></Content>
+      <div >
+        {this.state.ready ?
+          <div>
+            <Background3D t={this.state}></Background3D>
+            <Content></Content>
+          </div>
+          :
+          <div className="spinner-border text-danger" role="status">
+            <span className="sr-only">Loading...</span>
+          </div>
+        }
       </div>
 
     );
