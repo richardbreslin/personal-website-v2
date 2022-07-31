@@ -11,18 +11,44 @@ import React from 'react';
 
 function HomePage() {
 
+  const manager = new THREE.LoadingManager();
+  manager.onStart = function (url, itemsLoaded, itemsTotal) {
+    console.log('Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+  };
+  manager.onProgress = function (url, itemsLoaded, itemsTotal) {
+    console.log('Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.');
+  };
+  manager.onError = function (url) {
 
-  const textureLoader = new THREE.TextureLoader();
+    console.log('There was an error loading ' + url);
+
+  };
+
+  manager.onLoad = function () {
+    //meat
+    console.log('Loading complete!');
+
+  };
+
+  const loader = new THREE.TextureLoader(manager);
+  loader.load('/grid.png', function (object) {
+
+    //
+
+  });
+
+
+
+  // const textureLoader = new THREE.TextureLoader();
   const gridTexture: THREE.Texture = textureLoader.load("/grid.png");
   const heightTexture: THREE.Texture = textureLoader.load("/displacement-7.png");
   const metalnessTexture: THREE.Texture = textureLoader.load("/metalness-2.png");
-
-
+  const bgTexture = textureLoader.load('/background.jpg');
 
   //init scene class
   const scene = new THREE.Scene()
 
-  const bgTexture = textureLoader.load('/background.jpg');
+
   scene.background = bgTexture;
 
 
