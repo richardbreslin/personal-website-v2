@@ -1,6 +1,11 @@
+html {
+  background-color: black !important;
+}
+
 body {
   overflow: hidden;
   margin: 0px;
+  background-color: black !important;
 
 }
 
@@ -116,4 +121,21 @@ body {
     border-color: #F8F0E3;
 
   }
+}
+
+.spinner-size {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  background-color: rgb(29, 29, 29);
+
+}
+
+canvas {
+  background-color: rgb(29, 29, 29);
+  animation: fadeInAnimation 10s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }

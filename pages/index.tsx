@@ -195,6 +195,7 @@ class Background3D extends React.Component<BackgroundProps> {
 function Content() {
   return (
     <div className="info">
+
       <div className="container">
         <div className="row" style={{ display: "inline-block" }}>
           <div className="col">
@@ -279,8 +280,9 @@ export default class IndexPage extends React.Component<LoadedTextures> {
             <Content></Content>
           </div>
           :
-          <div className="spinner-border text-danger" role="status">
-            <span className="sr-only">Loading...</span>
+          <div className="spinner-size">
+            <div className="spinner-border text-danger" role="status">
+            </div>
           </div>
         }
       </div>
