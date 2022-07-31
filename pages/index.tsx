@@ -190,6 +190,8 @@ function HomePage() {
     render()
     animate();
   };
+
+  return (<div />)
 }
 
 function Content() {
@@ -218,26 +220,22 @@ function Content() {
 }
 
 type MyProps = {
-  // using `interface` is also ok
-  message: string;
+  // ready: string;
 };
 type MyState = {
-  count: number; // like this
+  ready: boolean;
 };
 
 export default class IndexPage extends React.Component<MyProps, MyState> {
   state: MyState = {
-    // optional second annotation for better type inference
-    count: 0,
+    ready: false,
   };
-  componentDidMount(): void {
+  componentDidMount() {
     HomePage();
   }
   render() {
     return (
-      <div>
-        <Content></Content>
-      </div>
+      <Content></Content>
     );
   }
 }
