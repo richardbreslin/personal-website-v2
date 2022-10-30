@@ -209,7 +209,7 @@ function Content() {
             <div className="col-md-auto">
               <a href="https://github.com/richardbreslin"><img src="/github.png" className="favi-link"></img></a>
               <a href="https://www.linkedin.com/in/r-breslin/"><img src="/linkedin.png" className="favi-link"></img></a>
-              <a href="mailto: richardbreslin@wayne.edu"><img src="/email2.png" className="favi-link"></img></a>
+              <a href="mailto: contact@r1ch.dev"><img src="/email2.png" className="favi-link"></img></a>
               <a href="https://resume.r1ch.dev"><img src="/cv.png" className="favi-link"></img></a>
             </div>
           </div>
